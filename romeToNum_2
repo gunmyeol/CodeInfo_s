@@ -1,0 +1,29 @@
+class Solution {  // 스위치 문을 이용한 문제 해결
+    public static int romanToInt(String s) {
+    int result = 0; 
+
+    int[] romeToNum = new int[s.length() + 1];
+
+    for(int i = 0; i < s.length(); i++) {
+       switch(s.charAt(i)) {
+           case 'I' : romeToNum[i] = 1; break;
+           case 'V' : romeToNum[i] = 5; break;
+           case 'X' : romeToNum[i] = 10; break;
+           case 'L' : romeToNum[i] = 50; break;
+           case 'C' : romeToNum[i] = 100; break;
+           case 'D' : romeToNum[i] = 500; break;
+           case 'M' : romeToNum[i] = 1000; break;
+        } 
+    }
+    
+    for(int j = 0; j < romeToNum.length - 1; j++) {
+        if(romeToNum[j] < romeToNum[j+1]) {
+            result -= romeToNum[j];
+        }
+        else {
+            result += romeToNum[j];
+        }
+    }
+    return result;
+}
+}
