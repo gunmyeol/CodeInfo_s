@@ -1,0 +1,43 @@
+class Solution {
+    public static int romanToInt(String s) {
+    String[][] romeNum = {
+        {"I", "1"},
+        {"V", "5"},
+        {"X", "10"},
+        {"L", "50"},
+        {"C", "100"},
+        {"D", "500"},
+        {"M", "1000"}
+    };
+    int result = 0;
+    int[] romeToNum = new int[s.length() + 1];
+    String[] inputRome = new String[s.length()];
+    // String[] inputRome = s.split("");
+
+
+    for(int n = 0; n < s.length(); n++) {
+        inputRome[n] = String.valueOf(s.charAt(n));
+    }
+
+    
+
+    for(int i = 0; i < inputRome.length; i++) {
+        for(int j = 0; j < romeNum.length; j++) {
+            if(romeNum[j][0] == inputRome[i]) {
+                romeToNum[i] = Integer.parseInt(romeNum[j][1]);
+                break;
+            }
+        }
+    }
+    for(int z = 0; z < romeToNum.length - 1; z++) {
+        if(romeToNum[z] < romeToNum[z+1]) {
+            result -= romeToNum[z];
+        }
+        else {
+            result += romeToNum[z];
+        }
+    }
+    return result;
+}
+
+}
