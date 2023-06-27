@@ -1,0 +1,14 @@
+class Solution {
+    public int climbStairs(int n) {
+        int fib_xn_1 = 0;
+        int fib_xn_2 = 1;
+        int count = 0;
+
+        for(int i = 1; i <= n; i++) {
+            count = fib_xn_1 + fib_xn_2;
+            fib_xn_1 = fib_xn_2;
+            fib_xn_2 = count;
+        }
+        return count;
+    }
+}
