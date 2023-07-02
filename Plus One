@@ -1,0 +1,27 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int end_Index = digits.length - 1;
+        int[] digits_New = new int[digits.length + 1];
+        digits[end_Index] += 1;
+        
+        for(int i = end_Index; i >= 0; i--) {
+            if(digits[i] == 10 && i >= 1) {
+                digits[i] = 0;
+                digits[i - 1] += 1;
+            }
+            else if(i == 0){
+                if(digits[i] == 10) {
+                    for(int j = digits.length - 1; j >= 1; j--) {
+                        digits_New[j] = digits[j];
+                    }
+                    digits_New[0] += 1;
+                    return digits_New;
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        return digits;
+    }
+}
