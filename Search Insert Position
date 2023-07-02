@@ -1,0 +1,91 @@
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int nums_L = nums.length;
+        int target_Index = 0;
+        int move_Index = 1;
+        
+        if(nums_L % 2 == 0) {
+            for(int i = nums_L - 1; i >= 0; i /= 2) {
+                if(nums[0] >= target) {
+                    break;
+                }
+                if(nums[i] <= target && i == nums_L - 1) {
+                    if(nums[i] == target) {
+                        target_Index = nums_L - 1;
+                        break;
+                    }
+                    else {
+                        target_Index = nums_L;
+                        break;
+                    }
+                }
+                if(i < nums_L - 1) {
+                    if(nums[i] == target) {
+                        target_Index = i;
+                        break;
+                    }
+                    else if(nums[i] < target && nums[i + 1] > target || nums[i + 1] == target) {
+                        target_Index = (i + 1); 
+                        break;
+                    }
+                    else if(nums[i] > target){
+                        continue;
+                    }
+                    else if(nums[i + 1] < target) {
+                        i = i * 3;
+                    }
+                }
+            }
+        }
+        if(nums_L % 2 == 1) {
+            for(int i = nums_L - 1; i >= 0; i /= 2) {
+                if(nums[0] >= target) {
+                    break;
+                }
+                if(nums[i] <= target && i == nums_L - 1) {
+                    if(nums[i] == target) {
+                        target_Index = nums_L - 1;
+                        break;
+                    }
+                    else {
+                        target_Index = nums_L;
+                        break;
+                    }
+                }
+                if(i < nums_L - 1) {
+                    if(nums[i] == target) {
+                        target_Index = i;
+                        break;
+                    }
+                    if(i >= 1) {
+                        if(nums[i - 1] <= target && nums[i + 1] >= target) {
+                            if(nums[i] < target) {
+                                target_Index = i + 1;
+                                break;
+                            }
+                            else if(nums[i] > target) {
+                                if(nums[i - 1] < target) {
+                                    target_Index = i;
+                                    break;
+                                }
+                                else {
+                                    target_Index = i - 1;
+                                    break;
+                                }
+                            }
+                        }
+                        else {
+                            if(nums[i + 1] < target) {
+                                i = i * 3;
+                            }
+                            else if(nums[i - 1] > target) {
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return target_Index;
+    }
+}
