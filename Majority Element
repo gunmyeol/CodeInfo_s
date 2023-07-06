@@ -1,0 +1,26 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        int elementDup_Count = 1;
+        int store_Count = 0;
+        int result = 0;
+        Arrays.sort(nums);
+
+        if(nums.length == 1) {
+            result = nums[0];
+        }
+
+        for(int i = 0; i < nums.length - 1; i++) {
+            if(nums[i] == nums[i + 1]) {
+                elementDup_Count++;
+            }
+            else {
+                elementDup_Count = 1;
+            }
+            if(store_Count < elementDup_Count) {
+                    store_Count = elementDup_Count;
+                    result = nums[i];
+            }
+        }
+        return result;
+    }
+}
