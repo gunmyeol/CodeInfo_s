@@ -1,0 +1,21 @@
+public class Solution { //StringUtils.leftPad(Integer.toBinaryString(x), 32, '0');
+                        // String.format("%32s", Integer.toBinaryString(x)).replaceAll(" ", "0");
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        String bin = Integer.toBinaryString(n);
+        int bin_L = bin.length() - 1;
+        long result = 0;
+        
+        while(bin_L <= 30) {
+            bin = "0" + bin;
+            bin_L += 1;
+        }
+
+        for(int i = bin_L; i >= 0; i--) {
+            if(String.valueOf(bin.charAt(i)).equals("1")) {
+                result += Math.pow(2, i);
+            }
+        }
+        return (int)result;
+    }    
+}
