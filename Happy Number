@@ -1,0 +1,46 @@
+class Solution {
+    public boolean isHappy(int n) {
+        ArrayList<Integer> store_Num = new ArrayList<>();
+        int num_Count = 0;
+        String num_L = String.valueOf(n);
+        boolean result = true;
+        int change_Num = 0;
+        int com_Num = 0;
+        
+
+        for(int i = 0; i < num_L.length(); i++) {
+                change_Num += Math.pow((n % 10), 2);
+                n /= 10;
+        }
+        store_Num.add(n); 
+        store_Num.add(change_Num); 
+
+        num_Count += 2;
+
+        while(change_Num != 1) {
+            String num_L1 = String.valueOf(change_Num);
+            
+            for(int i = 0; i < num_L1.length(); i++) {
+                com_Num += Math.pow((change_Num % 10), 2);
+                change_Num /= 10;
+            }
+            
+            store_Num.add(com_Num);
+            num_Count += 1;
+            change_Num = com_Num;
+            Collections.sort(store_Num);
+            
+            for(int j = 0; j < num_Count - 1; j++) {
+                if(store_Num.get(j) == store_Num.get(j + 1)) {
+                    result = false;
+                    break;
+                }
+            }
+            if(result == false) {
+                break;
+            }
+            com_Num = 0;
+        } 
+        return result;
+    }
+}
