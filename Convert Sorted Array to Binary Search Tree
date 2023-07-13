@@ -1,0 +1,20 @@
+class Solution {
+
+    public TreeNode sortedArrayToBST(int[] Sorted_Arrays_Nums) {
+        return binary_Search_Build(Sorted_Arrays_Nums,0, Sorted_Arrays_Nums.length-1) ;
+    }
+
+    public TreeNode binary_Search_Build(int[] Sorted_Arrays_Nums, int start_Index, int end_Index){
+        if (start_Index > end_Index) {
+            return null;
+        }
+        
+        int mid_Index = (end_Index + start_Index) / 2;
+        
+        TreeNode bulid_Node = new TreeNode(Sorted_Arrays_Nums[mid_Index]);
+        bulid_Node.left = binary_Search_Build(Sorted_Arrays_Nums, start_Index, mid_Index - 1);
+        bulid_Node.right = binary_Search_Build(Sorted_Arrays_Nums, mid_Index + 1, end_Index);
+        
+        return bulid_Node;
+    }
+}
