@@ -1,0 +1,40 @@
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int nums1_Index = 0;
+        int nums2_Index = 0;
+        int merge_Element = nums1.length + nums2.length;
+        ArrayList<Integer> mergeResult = new ArrayList<>();
+        
+
+        while(nums1_Index <= (nums1.length - 1) || nums2_Index <= (nums2.length - 1)) {
+            if(nums2_Index > (nums2.length - 1)) {
+                mergeResult.add(nums1[nums1_Index++]);
+                continue;
+            }
+            else if(nums1_Index > (nums1.length - 1)) {
+                mergeResult.add(nums2[nums2_Index++]);
+                continue;
+            }
+
+            if(nums1[nums1_Index] > nums2[nums2_Index]) {
+                mergeResult.add(nums2[nums2_Index++]);
+            }
+            else if(nums1[nums1_Index] < nums2[nums2_Index]) {
+                mergeResult.add(nums1[nums1_Index++]);
+            }
+            else if(nums1[nums1_Index] == nums2[nums2_Index]) {
+                mergeResult.add(nums1[nums1_Index++]);
+                mergeResult.add(nums2[nums2_Index++]);
+            }
+        }
+
+        int merge_Length = merge_Element - 1;
+
+        if(merge_Length % 2 == 1) {
+            return (double)(mergeResult.get(merge_Length / 2) + mergeResult.get(merge_Length / 2 + 1)) / 2;
+        }
+        else {
+            return (double)mergeResult.get(merge_Length / 2);
+        }
+    }
+}
