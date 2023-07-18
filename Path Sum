@@ -1,0 +1,43 @@
+class Solution {
+    int sum = 0;
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null) {
+            return false;
+        }
+        else if(root.right == null) {
+            targetSum -= root.val;
+            return result(root.left, targetSum);
+        }
+        else if(root.left == null) {
+            targetSum -= root.val;
+            return result(root.right, targetSum);
+        }
+        else {
+            targetSum -= root.val;
+            return result(root.left, targetSum) || result(root.right, targetSum);
+        }
+    }
+
+    private boolean result(TreeNode node, int targetSum) {
+        boolean result = false;
+
+        if(node != null) {
+            targetSum -= node.val;
+            if(node.right == null) {
+                return result(node.left, targetSum);
+            }
+            else if(node.left == null) {
+                return result(node.right, targetSum);
+            }
+            else {
+                return result(node.left, targetSum) || result(node.right, targetSum);
+            }
+        }
+        else {
+            if(targetSum == 0) {
+                result = true;
+            }
+        }
+        return result;
+    }
+}
