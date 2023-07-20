@@ -1,0 +1,26 @@
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode search = head;
+
+        if(head == null) {
+            return head;
+        }
+        else {
+            while(head != null && head.val == val) {
+                if(head.val == val) {
+                    head = head.next;
+                }
+            }
+
+            while(search.next != null) {
+                if(search.next.val == val) {
+                    search.next = search.next.next;
+                }
+                else {
+                    search = search.next;
+                }
+            } 
+        }
+        return head;
+    }
+}
