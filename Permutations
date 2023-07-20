@@ -1,0 +1,62 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        int caseCount = factorial(nums.length);
+        
+        for(int i = 0; i < caseCount; i++) {
+            List<Integer> cases = new ArrayList<>();
+            int[] ranIndex = buildRan_NumsIndex(nums.length);
+            for(int j = 0; j < nums.length; j++) {
+                cases.add(nums[ranIndex[j]]);
+            }
+            result.add(cases);
+            if(i == 0) {
+                continue;
+            }
+            else {
+                if(storeArrayCompare(result, i)) {
+                    result.remove(i);
+                    i--;                    
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+	    return result;
+    }
+
+    private int[] buildRan_NumsIndex(int max_Index) {
+        int[] storeIndex = new int[max_Index];
+        for(int i = 0; i < max_Index; i++) {
+            storeIndex[i] = (int)(Math.random() * max_Index);
+            for(int j = 0; j < i; j++) {
+                if(storeIndex[i] == storeIndex[j]) {
+                    i -= 1;
+                    break;
+                }
+            }
+        }
+        return storeIndex;
+    }
+
+    private int factorial(int number) {
+        int result = 1;
+        for(int i = number; i >= 1; i--) {
+            result = i * result;
+        }
+        return result;
+    }
+
+    private boolean storeArrayCompare(List<List<Integer>> input, int compareIndex) {
+        for(int i = 0; i < compareIndex; i++) {
+            if(input.get(i).equals(input.get(compareIndex))) {
+                return true;
+            }
+            else {
+                continue;
+            }
+        }
+        return false;
+    }
+}
