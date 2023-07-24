@@ -1,0 +1,102 @@
+class Solution {
+    public int myAtoi(String s) {
+        int result = 0;
+        boolean includeMinus = false;
+        boolean includePlus = false;
+        String onlyNumber = "";
+        int removeFrontZero = 0;
+
+        s = s.stripLeading();
+
+        for(int i = 0; i < s.length(); i++) {
+            if(String.valueOf(s.charAt(i)).equals("-")) {
+                if(i == 0) {
+                    StringBuilder remove_PlusMinus = new StringBuilder(s);
+                    includeMinus = true;
+                    remove_PlusMinus.setCharAt(i, ' ');
+                    s = remove_PlusMinus.toString();
+                    if((i + 1) < (s.length() - 1) && s.charAt(i + 1) == ' ') {
+                        break;
+                    }
+                    s = s.stripLeading();
+                }
+                break;
+            }
+            else {
+                continue;
+            }
+        }
+
+        for(int i = 0; i < s.length(); i++) {
+            if(String.valueOf(s.charAt(i)).equals("+")) {
+                if(i == 0) {
+                    StringBuilder remove_PlusMinus = new StringBuilder(s);
+                    includePlus = true;
+                    remove_PlusMinus.setCharAt(i, ' ');
+                    s = remove_PlusMinus.toString();
+                    if((i + 1) < (s.length() - 1) && s.charAt(i + 1) == ' ') {
+                        break;
+                    }
+                    s = s.stripLeading();
+                }
+                break;
+            }
+            else {
+                continue;
+            }
+        }
+        
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) <= '9' && s.charAt(i) >= '0') {
+                if(s.charAt(i) == '0' && removeFrontZero == 0) {
+                    continue;
+                }
+                else {
+                    onlyNumber = onlyNumber + String.valueOf(s.charAt(i));
+                    removeFrontZero = 1;
+                }
+            }
+            else {
+                break;
+            }
+        }
+
+        if(onlyNumber.length() == 0) {
+            return 0;
+        }
+
+        if(onlyNumber.length() > 10 && includeMinus) {
+            return Integer.MIN_VALUE;
+        }
+        else if(onlyNumber.length() > 10 && !(includeMinus)) {
+            return Integer.MAX_VALUE;
+        }
+        else if(onlyNumber.length() <= 10){
+            long bit32Over = Long.parseLong(onlyNumber);
+
+            if(includeMinus) {
+                bit32Over = 0 - bit32Over;
+            }
+        
+            if(bit32Over >= Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            }
+            else if(bit32Over <= Integer.MIN_VALUE){
+                return Integer.MIN_VALUE;
+            }
+            else {
+                result = Integer.valueOf(onlyNumber);
+            }
+        }
+        
+        if(includeMinus) {
+            result = 0 - result;
+        } 
+
+        if(includeMinus && includePlus) {
+            return 0;
+        }
+
+        return result;
+    }
+}
