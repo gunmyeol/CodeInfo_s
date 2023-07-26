@@ -1,0 +1,19 @@
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int last_Word_L = 0;
+        int space_Count = 0;
+        
+        String FB_Remove_Space = s.trim();
+        
+        for(int i = FB_Remove_Space.length() - 1; i >= 0; i--) {
+            String letter = String.valueOf(FB_Remove_Space.charAt(i));
+            if(letter.equals(" ")) {
+                break;
+            }
+            else {
+                last_Word_L += 1;
+            }
+        }
+        return last_Word_L;
+    }
+}
