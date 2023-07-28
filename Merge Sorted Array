@@ -1,0 +1,51 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] mergeResult = new int[n + m];
+        int nums1Index = 0;
+        int nums2Index = 0;
+
+        if(nums2.length == 0) {
+            return;
+        }
+
+        for(int i =0; i < n+m; i++) {
+            if(nums2Index <= nums2.length - 1 && nums1Index <= m - 1) {
+                if(nums1[nums1Index] > nums2[nums2Index]) {
+                    mergeResult[i] = nums2[nums2Index++];
+                }
+                else if(nums1[nums1Index] == nums2[nums2Index]) {
+                    mergeResult[i] = nums1[nums1Index++];
+                    i += 1;
+                    mergeResult[i] = nums2[nums2Index++];
+                }
+                else {
+                        mergeResult[i] = nums1[nums1Index++];
+                }
+            }
+            else {
+                if(nums1[nums1Index] == 0) {
+                    if(nums2Index <= nums2.length - 1){
+                        mergeResult[i] = nums2[nums2Index++];
+                    }
+                    else {
+                        break;
+                    }
+                }
+
+                if(nums1[nums1Index] != 0) {
+                    mergeResult[i] = nums1[nums1Index++];
+                }
+                else if(nums2Index <= nums2.length - 1){
+                    continue;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+
+        for(int i = 0; i < mergeResult.length; i++) {
+            nums1[i] = mergeResult[i];
+        }
+    }
+}
