@@ -1,0 +1,17 @@
+class Solution { // Arrays.asList(arr).indexOf("b"), Arrays.binarySearch(arr, "d");
+    public int maxProfit(int[] prices) {
+        int cheap = prices[0];
+        int max_P = 0;
+
+        for(int i = 1; i < prices.length; i++) {
+            if(prices[i] < cheap) {
+                cheap = prices[i];
+            }
+            
+            if(prices[i] > cheap && max_P < prices[i] - cheap) {
+                max_P = prices[i] - cheap;
+            }
+        }
+        return max_P;
+    }
+}
