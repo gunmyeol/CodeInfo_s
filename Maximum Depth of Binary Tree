@@ -1,0 +1,23 @@
+class Solution { // Math.max(a, b)
+    public int maxDepth(TreeNode root) {
+        if(root == null) {
+            return 0;
+        }
+        else {
+            if(get_Depth(root.right) > get_Depth(root.left)) {
+                return 1 + get_Depth(root.right);
+            }
+            else {
+                return 1 + get_Depth(root.left);
+            }
+        }
+    }
+    private int get_Depth(TreeNode node) {
+        if(node != null) {
+            return 1 + Math.max(get_Depth(node.left), get_Depth(node.right));
+        }
+        else {
+            return 0;
+        }
+    }
+}
