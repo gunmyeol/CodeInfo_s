@@ -1,0 +1,18 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result = new ArrayList<>();
+        
+        for(int z = 1; z <= numRows; z++) {
+            List<Integer> level = new ArrayList<>();
+            level.add(1);
+            for (int i = 1; i <= z - 1; i++) {
+                for (int j = level.size() - 2; j >= 0; j--) {
+                    level.set(j + 1, level.get(j) + level.get(j + 1));
+                }
+            level.add(1);
+            }
+            result.add(level);
+        }
+        return result;
+    }
+}
