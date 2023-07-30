@@ -1,0 +1,25 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int[] com_Prices = new int[prices.length + 1];
+        int cheap = prices[0];
+        int max_P = 0;
+
+        for(int i = 0; i < prices.length; i++) {
+            com_Prices[i] = prices[i];
+        }
+        
+        for(int i = 0; i < prices.length; i++) {
+            if(cheap > com_Prices[i]) {
+                cheap = com_Prices[i];
+            }
+            
+            if(cheap <= com_Prices[i]) {
+                if(com_Prices[i + 1] < com_Prices[i]) {
+                    max_P += (com_Prices[i] - cheap);
+                    cheap = com_Prices[i];
+                }
+            }
+        }
+        return max_P;
+    }
+}
