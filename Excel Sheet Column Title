@@ -1,0 +1,21 @@
+class Solution {
+    String result = "";
+    public String convertToTitle(int columnNumber) {
+        if(columnNumber <= 26) {
+            result += String.valueOf((char)(columnNumber + 64));
+        }
+        else {
+            if(columnNumber % 26 == 0) {
+                convertToTitle(columnNumber / 26 - 1);
+                convertToTitle(columnNumber % 26 + 26);
+
+            }
+            else {
+                convertToTitle(columnNumber / 26);
+                convertToTitle(columnNumber % 26);
+            }
+            
+        }
+        return result;
+    }
+}
