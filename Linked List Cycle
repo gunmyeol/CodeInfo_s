@@ -1,0 +1,16 @@
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode searchSlow = head;
+        ListNode searchFast = head;
+        
+        while(searchFast != null && searchFast.next != null){
+            searchFast = searchFast.next.next;
+            searchSlow = searchSlow.next;
+            
+            if(searchFast == searchSlow) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
