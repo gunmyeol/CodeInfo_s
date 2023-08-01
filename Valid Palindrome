@@ -1,0 +1,23 @@
+class Solution { //toLowerCase()와 toUpperCase()
+    public boolean isPalindrome(String s) {
+        String match = "[^\uAC00-\uD7A30-9a-zA-Z]";
+        s = s.toLowerCase();
+        s = s.replaceAll(match, "");
+        boolean result = true; 
+
+        int start = 0;
+        int end = s.length() - 1;
+
+        while(start <= end) {
+            if(s.charAt(start) == s.charAt(end)) {
+                start++;
+                end--;
+            }
+            else {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+}
