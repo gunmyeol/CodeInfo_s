@@ -1,0 +1,23 @@
+class Solution {
+    public int titleToNumber(String columnTitle) {
+        int leng = columnTitle.length() - 1;
+        int digit = 0;
+        int result = 0;
+        if(leng == 0) {
+            return columnTitle.charAt(leng) - 64;
+        }
+        else {
+            for(int i = leng; i >= 0; i--) {
+                if(i == leng) {
+                    result += (columnTitle.charAt(i) - 64);
+                    digit += 1;
+                }
+                else {
+                    result += (Math.pow(26, digit) * (columnTitle.charAt(i) - 64));
+                    digit += 1;  
+                }
+            }
+        }
+        return result;
+    }
+}
