@@ -1,0 +1,45 @@
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        int listSize = 1;
+        int arrayIndex = 0;
+        ListNode search = head;
+
+        if(head == null) {
+            return head;
+        }
+
+        while(search.next != null) {
+            listSize += 1;
+            search = search.next;
+        }
+        
+        search = head;
+        int[] listToArray = new int[listSize];
+        int[] reverseListToArray = new int[listSize];
+
+        while(search.next != null || arrayIndex < listSize) {
+            listToArray[arrayIndex] = search.val;
+            arrayIndex += 1;
+            if(search.next != null) {
+               search = search.next;
+            }
+        }
+
+        for (int i = listToArray.length - 1, j = 0; i >= 0; i--, j++) {
+            reverseListToArray[j] = listToArray[i];
+        }
+
+        search = head;
+        arrayIndex = 0;
+
+        while(search.next != null || arrayIndex < listSize) {
+            search.val =  reverseListToArray[arrayIndex];
+            arrayIndex += 1;
+            if(search.next != null) {
+               search = search.next;
+            }
+        }
+
+        return head;
+    }
+}
