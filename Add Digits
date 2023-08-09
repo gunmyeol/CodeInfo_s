@@ -1,0 +1,15 @@
+class Solution {
+    public int addDigits(int num) {
+        String stNum = String.valueOf(num);
+        int digitSum = 0;
+
+        while(stNum.length() >= 2) {
+            for(int i = 0; i < stNum.length(); i++) {
+                digitSum += Character.getNumericValue(stNum.charAt(i));
+            }
+            stNum = String.valueOf(digitSum);
+            digitSum = 0;
+        }
+        return Integer.valueOf(stNum);
+    }
+}
