@@ -1,0 +1,48 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        int mTs = 0;
+        int mTe = 0;
+        boolean result = true;
+        ListNode search = head;
+        int size = nodeSize(search);
+        int[] listToArray = new int[size];
+
+        for(int i = 0; i < size; i++) {
+            listToArray[i] = search.val;
+            search = search.next;
+        }
+
+        if(size % 2 == 0) {
+            mTs = (size / 2) - 1;
+            mTe = mTs + 1;
+
+            while(mTs >= 0 && mTe <= size - 1) {
+                if(listToArray[mTs--] != listToArray[mTe++]){
+                    result = false; 
+                    break;
+                }
+            }
+        }
+        else {
+            mTs = (size / 2);
+            mTe = mTs; 
+
+            while(mTs >= 0 && mTe <= size - 1) {
+                if(listToArray[mTs--] != listToArray[mTe++]){
+                   result = false; 
+                   break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private int nodeSize(ListNode node) {
+        int count = 1;
+        while(node.next != null) {
+            count += 1;
+            node = node.next;
+        }
+        return count;
+    }
+}
