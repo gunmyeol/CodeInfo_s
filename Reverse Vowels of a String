@@ -1,0 +1,32 @@
+class Solution {
+    public String reverseVowels(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        StringBuilder sVowel = new StringBuilder("");
+        int volIndex = 0;
+
+        for(int i = 0; i < s.length(); i++) {
+            if(isVowels(s.charAt(i))) {
+                sVowel.append(String.valueOf(s.charAt(i)));
+            }
+        }
+
+        sVowel.reverse();
+
+        String reverseVol = sVowel.toString();
+
+        for(int i = 0; i < s.length(); i++) {
+            if(isVowels(s.charAt(i))) {
+                sb.setCharAt(i, reverseVol.charAt(volIndex));
+                volIndex += 1;
+            }
+        }
+        return sb.toString(); 
+    }
+  
+    private boolean isVowels(char letter) {
+        if(letter == 'a' || letter == 'i' || letter == 'o' || letter == 'u' || letter == 'e' ||letter == 'A' || letter == 'I' || letter == 'O' || letter == 'U' || letter == 'E') {
+            return true;
+        }
+        return false;
+    }
+}
