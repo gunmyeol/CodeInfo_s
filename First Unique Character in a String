@@ -1,0 +1,38 @@
+class Solution {
+    public int firstUniqChar(String s) {
+        char check = '.';
+        char letter = '.';
+        int result = 0;
+
+        if(s.length() == 1) {
+            return 0;
+        }
+
+        for(int i = 0; i < s.length(); i++) {
+            letter = s.charAt(i);
+            if(letter == check) {
+                continue;
+            }
+            for(int j = 0; j < s.length(); j++) {
+                if(s.charAt(j) == letter) {
+                    if(j == i) {
+                        if(j == s.length() - 1) {
+                            return i;
+                        }
+                        continue;
+                    }
+                    else {
+                        check = letter;
+                        break;    
+                    }
+                }
+                else {
+                    if(j == s.length() - 1) {
+                        return i;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+}
