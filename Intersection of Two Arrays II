@@ -1,0 +1,40 @@
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        List<Integer> result = new ArrayList<>();
+        int nums1Count = nums1.length;
+        int nums2Count = nums2.length;
+
+        if(nums1Count > nums2Count) {
+            for(int i = 0; i < nums2.length; i++) {
+                for(int j = 0; j < nums1.length; j++) {
+                    if(nums2[i] == nums1[j]) {
+                        result.add(nums2[i]);
+                        nums1 = removeElement(nums1, j);
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            for(int i = 0; i < nums1.length; i++) {
+                for(int j = 0; j < nums2.length; j++) {
+                    if(nums1[i] == nums2[j]) {
+                        result.add(nums1[i]);
+                        nums2 = removeElement(nums2, j);
+                        break;
+                    }
+                }
+            }
+        }
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    public static int[] removeElement(int[] arr, int index) {
+        int[] result = new int[arr.length - 1];
+        System.arraycopy(arr, 0, result, 0, index);
+        if (arr.length != index) {
+            System.arraycopy(arr, index + 1, result, index, arr.length - index - 1);
+        }
+        return result;
+    }
+}
