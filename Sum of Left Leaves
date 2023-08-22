@@ -1,0 +1,19 @@
+class Solution {
+    
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftSum = 0;
+
+        if (root.left != null && root.left.left == null && root.left.right == null) {
+            leftSum += root.left.val;
+        }
+
+        int leftSubtreeSum = sumOfLeftLeaves(root.left);
+        int rightSubtreeSum = sumOfLeftLeaves(root.right);
+        
+        return leftSum + leftSubtreeSum + rightSubtreeSum;
+    }
+}
