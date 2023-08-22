@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int sIndex = 0;
+        int s_L = s.length();
+        int t_L = t.length();
+
+        if(s_L > t_L) {
+            return false;
+        }
+        else if(s_L == 0) {
+            return true;
+        }
+
+        for(int i = 0; i < t_L; i++) {
+            if(sIndex == s_L) {
+                break;
+            }
+
+            if(s.charAt(sIndex) == t.charAt(i)) {
+                sIndex += 1;
+            }
+        }
+
+        if(sIndex == s_L) {
+            return true;
+        }
+
+        return false;
+    }
+}
