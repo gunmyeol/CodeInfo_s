@@ -1,0 +1,25 @@
+class Solution {
+    public int hammingDistance(int x, int y) {
+        int xBinaryArray[] = convertToBinaryArray(x);
+        int yBinaryArray[] = convertToBinaryArray(y);
+    
+        int hDistance = 0;
+        for (int i = 0; i < xBinaryArray.length; i++) {
+            if (xBinaryArray[i] != yBinaryArray[i]) {
+                hDistance++;
+            }
+        }
+
+        return hDistance;        
+    }
+
+    public static int[] convertToBinaryArray(int number) {
+        int[] binaryArray = new int[32];
+
+        for (int i = 31; i >= 0; i--) {
+            binaryArray[i] = number & 1; 
+            number >>= 1;
+        }
+        return binaryArray;
+    }
+}
